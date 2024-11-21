@@ -14,6 +14,11 @@ const TakeTest = () => {
   const [error, setError] = useState<string | null>(null);
   const [isRequestSuccessful, setIsRequestSuccessful] = useState(false);
   const [quizquestions, setquizquestions] = useState<{ [key: string]: any }>({});;
+  const [content_preferences, setContentPreferences] = useState({
+    topic: '',
+    currentKnowledge: '',
+    expectedContentLevel: '',
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,6 +30,11 @@ const TakeTest = () => {
       currentKnowledge,
       expectedContentLevel,
     };
+    setContentPreferences({
+      topic: selectedTopic,
+      currentKnowledge,
+      expectedContentLevel,
+    });
   
     try {
       const response = await fetch('/api/generate_test', {
@@ -147,7 +157,7 @@ const TakeTest = () => {
          
       <h1>Backend Request Status</h1>
       {isRequestSuccessful && (
-        <Quiz questions={quizquestions} />
+        <Quiz questions={quizquestions} preferences = {content_preferences} />
       )}
     </div>
       </div>

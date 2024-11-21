@@ -6,6 +6,12 @@ type Question = {
   correct_answer: string; // Correct answer in 'A', 'B', 'C', 'D' format
 };
 
+interface preferences {
+  topic: string;
+  currentKnowledge: string;
+  expectedContentLevel: string;
+}
+
 type QuizProps = {
   questions: { [key: string]: Question }; // JSON object with string keys
 };
@@ -16,7 +22,7 @@ type QuizResult = {
   correct_answer: string;
 };
 
-const Quiz: React.FC<QuizProps> = ({ questions }) => {
+const Quiz: React.FC<QuizProps> = ({ questions, preferences }) => {
   // Convert JSON object to an array of questions
   const questionArray = Object.values(questions["data_json"] || {});
 
@@ -106,7 +112,10 @@ const Quiz: React.FC<QuizProps> = ({ questions }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ quizResults: updatedQuizResults }),
+        body: JSON.stringify({ 
+          preferences,
+          quizResults: updatedQuizResults
+         }),
       });
   
       // Check if the response is successful
