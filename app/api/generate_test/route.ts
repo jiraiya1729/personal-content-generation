@@ -6,7 +6,7 @@ import { NextResponse } from 'next/server';
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { PromptTemplate } from '@langchain/core/prompts';
 
-export async function POST(req) {
+export async function POST(req:any) {
   try {
     const body = await req.json(); // Parse the JSON payload
     const { topic, currentKnowledge, expectedContentLevel } = body;
