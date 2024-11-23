@@ -9,9 +9,9 @@ export default function Home() {
   const router = useRouter();
   const userSession = sessionStorage.getItem('user');
 
-  // if (!user && !userSession) {
-  //   router.push('/signup');
-  // }
+  if (!user && !userSession) {
+    router.push('/signup');
+  }
 
   return (
     <div className="min-h-screen bg-gray-900 text-white flex flex-col">
