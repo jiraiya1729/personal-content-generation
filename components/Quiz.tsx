@@ -13,7 +13,7 @@ interface preferences {
 }
 
 type QuizProps = {
-  questions: { [key: string]: Question }; // JSON object with string keys
+  questions: any; // JSON object with string keys
 };
 
 type QuizResult = {

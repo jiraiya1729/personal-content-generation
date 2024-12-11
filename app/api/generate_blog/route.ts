@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { PromptTemplate } from '@langchain/core/prompts';
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 // Optional: Define a type for your quiz results
 interface QuizResults {
   // Define the structure of your quiz results
@@ -67,10 +68,12 @@ export async function POST(request: NextRequest) {
       targetLevel: preferences["expectedContentLevel"],
       quizResult: quizResults
     });
-
+    // const genAI = new GoogleGenerativeAI("AIzaSyA2lEGUlSGMOJsBkSpCQWmi-wXrcF5SSnI");
     const chatModel = new ChatGoogleGenerativeAI({
-      apiKey: "AIzaSyD6pxrSNrqAz5pEjAB1AyPpkszltdpFYgs", // Use environment variable for security
+      apiKey: "AIzaSyCVOh9GDI_AC41DIbVd9ElGS0bkUWAVPyw", // Use environment variable for security
     });
+    // const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    // const response_content = await model.generateContent([prompt]);
     const response_content = await chatModel.invoke(formattedPrompt);
     console.log(response_content)
     // Here you can add more complex processing
