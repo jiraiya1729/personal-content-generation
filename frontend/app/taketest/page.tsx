@@ -19,7 +19,7 @@ const TakeTestPage = () => {
 
   return (
     <div>
-      <h1>Take the Test</h1>
+
 
       {/* Conditionally render UserInput or the Quiz component */}
       {!generateQuiz ? (
