@@ -1,46 +1,34 @@
-'use client';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '@/app/firebase/config';
-import { useRouter } from 'next/navigation';
-import { signOut } from 'firebase/auth';
+import Image from "next/image";
+import React from 'react';
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Home() {
-  const [user] = useAuthState(auth);
-  const router = useRouter();
-  const userSession = sessionStorage.getItem('user');
-
-  // if (!user && !userSession) {
-  //   router.push('/signup');
-  // }
-
   return (
-    <div className="min-h-screen bg-gray-900 text-white flex flex-col">
-      {/* Navbar */}
-      <nav className="bg-gray-800 px-6 py-4 flex justify-between items-center shadow-md">
-        <h1 className="text-xl font-bold">Your App</h1>
-        <button
-          onClick={() => {
-            signOut(auth);
-            sessionStorage.removeItem('user');
-          }}
-          className="px-4 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-400"
-        >
-          Logout
-        </button>
-      </nav>
-
-      {/* Main Content */}
-      <main className="flex flex-1 items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold mb-6">Welcome to Your Personalized Dashboard</h2>
-          <button
-            onClick={() => router.push('/create-lesson')}
-            className="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-          >
-            Create a Personalized Lesson
-          </button>
+    <div className="min-h-screen bg-[#121712] text-[#E8E8E8] flex flex-col items-center justify-center p-4">
+      <div className="max-w-3xl text-center space-y-12">
+        <div className="space-y-6">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-[#00E676] to-[#00FF8D] bg-clip-text text-transparent">
+            Discover Your Learning Path
+          </h1>
+          
+          <p className="text-[#A0A0A0] text-xl max-w-2xl mx-auto">
+            Take our assessment test to receive personalized content tailored to your skill level
+          </p>
         </div>
-      </main>
+
+        <div className="mt-16">
+          <Link href="/taketest">
+            <Button 
+              className="bg-[#00C853] hover:bg-[#00FF8D] text-black text-lg px-8 py-6 transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_16px_rgba(0,0,0,0.5)]"
+            >
+              Start Assessment
+              <ArrowRight className="ml-2 h-6 w-6" />
+            </Button>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }
